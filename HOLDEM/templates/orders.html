@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}My Orders{% endblock %}
+
+{% block content %}
+<div class="orders-container">
+    <h1>My Orders</h1>
+    {% if orders %}
+        <ul>
+            {% for order in orders %}
+                <li>
+                    <strong>Order ID:</strong> {{ order[0] }}<br>
+                    <strong>Total Amount:</strong> ${{ "%.2f"|format(order[2]) }}<br>
+                    <strong>Status:</strong> {{ order[3] }}
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>You have no orders yet.</p>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}HOLDEM - EDIT USER{% endblock %}
+
+{% block content %}
+<div class="admin-container">
+    <h1>Edit User</h1>
+    <form method="POST">
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" value="{{ user.Username }}" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" value="{{ user.Email }}" required>
+        </div>
+        <div class="form-group">
+            <label for="is_active">Active</label>
+            <input type="checkbox" id="is_active" name="is_active" {% if user.IsActive %}checked{% endif %}>
+        </div>
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+    </form>
+</div>
+{% endblock %}

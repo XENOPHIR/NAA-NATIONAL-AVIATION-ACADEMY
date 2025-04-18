@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block title %}Search Results{% endblock %}
+
+{% block content %}
+
+<div class="search-results-container">
+    <h2>Search Results{% if query %} for "{{ query }}"{% endif %}</h2>
+
+    {% if products|length > 0 %}
+        <div class="product-section">
+            {% for product in products %}
+            <div class="product-container">
+                <div class="product-images">
+                    <img src="{{ url_for('static', filename=product.ImagePath) }}" alt="{{ product.Name }} Image" class="product-image">
+                </div>
+                <div class="product-info">
+                    <h1>{{ product.Name }}</h1>
+                    <p class="price">${{ "%.2f"|format(product.BasePrice) }}</p>
+                    <p class="description">{{ product.Description }}</p>
+                    <ul>
+                        <li>Category: {{ product.CategoryName }}</li>
+                        <li>Brand: {{ product.BrandName }}</li>
+                        <li>Tags: {{ product.Tags }}</li>
+                    </ul>
+                </div>
+
+                <br>
+
+                <!-- Buttons for Cart and Wishlist -->
+                <div class="product-btns">
+                    <button class="btn btn-pr">Add to Cart</button>
+                    <br>
+                    <button class="btn btn-pr-secondary">Add to Favorites</button>
+                    <br>
+                    <button class="btn btn-pr-secondary">Show Details</button>
+                </div>
+
+            </div>
+            {% endfor %}
+        </div>
+        <div class="pagination">
+            {% for page_num in range(1, total_pages + 1) %}
+            <a href="?q={{ query }}&page={{ page_num }}{% if query_string %}&{{ query_string }}{% endif %}" 
+               class="{% if page_num == current_page %}active{% endif %}">
+               {{ page_num }}
+            </a>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>No results found{% if query %} for "{{ query }}"{% endif %}.</p>
+    {% endif %}
+</div>
+
+{% endblock %}

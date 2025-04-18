@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+
+{% block title %}Manage Brands{% endblock %}
+
+{% block content %}
+<div class="admin-container">
+    <h1>Manage Brands</h1>
+
+    <form method="POST" class="admin-form">
+        <div class="form-group">
+            <label for="name">Brand Name</label>
+            <input type="text" name="name" id="name" placeholder="Enter brand name" required>
+        </div>
+        <div class="form-group">
+            <label for="description">Description</label>
+            <textarea name="description" id="description" placeholder="Enter brand description"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="is_active">
+                <input type="checkbox" name="is_active" id="is_active" checked>
+                Active
+            </label>
+        </div>
+        <button type="submit" class="btn btn-primary">Add Brand</button>
+    </form>
+
+    {% if brands|length > 0 %}
+    <table class="admin-table">
+        <thead>
+            <tr>
+                <th>Brand ID</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for brand in brands %}
+            <tr id="brand-{{ brand.BrandID }}">
+                <td>{{ brand.BrandID }}</td>
+                <td>{{ brand.Name }}</td>
+                <td>{{ brand.Description }}</td>
+                <td>
+                    {% if brand.IsActive %}
+                    <span class="status-active">Active</span>
+                    {% else %}
+                    <span class="status-inactive">Inactive</span>
+                    {% endif %}
+                </td>
+                <td>
+                    <button class="btn btn-secondary" onclick="showEditForm({{ brand.BrandID }})">Edit</button>
+                    <form action="{{ url_for('admin.delete_brand', brand_id=brand.BrandID) }}" method="POST" style="display:inline;">
+                        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this brand?');">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            <tr id="edit-form-{{ brand.BrandID }}" style="display: none;">
+                <td colspan="5">
+                    <form method="POST" action="{{ url_for('admin.edit_brand', brand_id=brand.BrandID) }}">
+                        <div class="form-group-edit">
+                            <label for="edit-name-{{ brand.BrandID }}">Brand Name</label>
+                            <input type="text" name="name" id="edit-name-{{ brand.BrandID }}" value="{{ brand.Name }}" required>
+                        </div>
+                        <div class="form-group-edit">
+                            <label for="edit-description-{{ brand.BrandID }}">Description</label>
+                            <textarea name="description" id="edit-description-{{ brand.BrandID }}">{{ brand.Description }}</textarea>
+                        </div>
+                        <div class="form-group-edit">
+                            <label for="edit-is_active-{{ brand.BrandID }}">
+                                <input type="checkbox" name="is_active" id="edit-is_active-{{ brand.BrandID }}" {% if brand.IsActive %}checked{% endif %}>
+                                <br>
+                                Active
+                            </label>
+                        </div>
+                        <button type="submit" class="btn btn-success">Save Changes</button>
+                        <button type="button" class="btn btn-secondary" onclick="hideEditForm({{ brand.BrandID }})">Cancel</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p class="empty-message">No brands found in the system.</p>
+    {% endif %}
+</div>
+
+<script>
+    function showEditForm(brandID) {
+        document.getElementById('brand-' + brandID).style.display = 'none';
+        document.getElementById('edit-form-' + brandID).style.display = 'table-row';
+    }
+
+    function hideEditForm(brandID) {
+        document.getElementById('brand-' + brandID).style.display = 'table-row';
+        document.getElementById('edit-form-' + brandID).style.display = 'none';
+    }
+</script>
+{% endblock %}

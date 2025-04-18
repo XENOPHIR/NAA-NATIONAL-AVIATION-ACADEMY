@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="manage-container">
+    <h1>Manage User Roles</h1>
+    <form method="POST" class="manage-form dropdown-container">
+        <div>
+            <label for="user_id">Select User:</label>
+            <select id="user_id" name="user_id" required>
+                {% for user in users %}
+                <option value="{{ user[0] }}">{{ user[1] }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div>
+            <label for="role_id">Select Role:</label>
+            <select id="role_id" name="role_id" required>
+                {% for role in roles %}
+                <option value="{{ role[0] }}">{{ role[1] }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <button type="submit">Assign Role</button>
+    </form>
+
+    <h2 class="section-title">User Roles</h2>
+    <table class="manage-table">
+        <thead>
+            <tr>
+                <th>User</th>
+                <th>Role</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for ur in user_roles %}
+            <tr>
+                <td>{{ ur[1] }}</td>
+                <td>{{ ur[2] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+
+{% block title %}HOLDEM - ADMIN DASHBOARD{% endblock %}
+
+{% block content %}
+<div class="dashboard-container">
+    <div class="dashboard-header">
+        <h1>Admin Dashboard</h1>
+    </div>
+
+    <div class="dashboard-sections">
+        <!-- User Management Section -->
+        <div class="dashboard-section">
+            <div class="section-header">
+                <h2>Manage Users</h2>
+            </div>
+            <div class="section-content">
+                <p>View and manage all registered users in the system.</p>
+                <a href="{{ url_for('admin.manage_users') }}" class="btn btn-primary">Go to Users</a>
+            </div>
+        </div>
+
+        <!-- Product Management Section -->
+        <div class="dashboard-section">
+            <div class="section-header">
+                <h2>Manage Products</h2>
+            </div>
+            <div class="section-content">
+                <p>Manage inventory, add new products, or update existing ones.</p>
+                <a href="{{ url_for('admin.manage_products') }}" class="btn btn-primary">Go to Products</a>
+            </div>
+        </div>
+
+        <!-- Tag Management Section -->
+        <div class="dashboard-section">
+            <div class="section-header">
+                <h2>Manage Tags</h2>
+            </div>
+            <div class="section-content">
+                <p>Create, edit, and manage tags associated with products.</p>
+                <a href="{{ url_for('admin.manage_tags') }}" class="btn btn-primary">Go to Tags</a>
+            </div>
+        </div>
+
+        <!-- Brand Management Section -->
+        <div class="dashboard-section">
+            <div class="section-header">
+                <h2>Manage Brands</h2>
+            </div>
+            <div class="section-content">
+                <p>Create, edit, and manage brands associated with products.</p>
+                <a href="{{ url_for('admin.manage_brands') }}" class="btn btn-primary">Go to Brands</a>
+            </div>
+        </div>
+
+        <!-- Category Management Section -->
+        <div class="dashboard-section">
+            <div class="section-header">
+                <h2>Manage Categories</h2>
+            </div>
+            <div class="section-content">
+                <p>Create, edit, and manage categories associated with products.</p>
+                <a href="{{ url_for('admin.manage_categories') }}" class="btn btn-primary">Go to Categories</a>
+            </div>
+        </div>
+
+        <!-- Role Management Section -->
+        <div class="dashboard-section">
+            <div class="section-header">
+                <h2>Manage Roles</h2>
+            </div>
+            <div class="section-content">
+                <p>Create, edit, and manage user roles in the system.</p>
+                <a href="{{ url_for('admin.manage_roles') }}" class="btn btn-primary">Go to Roles</a>
+            </div>
+        </div>
+
+        <!-- Permission Management Section -->
+        <div class="dashboard-section">
+            <div class="section-header">
+                <h2>Manage Permissions</h2>
+            </div>
+            <div class="section-content">
+                <p>Define and manage permissions for roles in the system.</p>
+                <a href="{{ url_for('admin.manage_permissions') }}" class="btn btn-primary">Go to Permissions</a>
+            </div>
+        </div>
+
+        <!-- Role-Permission Assignment Section -->
+        <div class="dashboard-section">
+            <div class="section-header">
+                <h2>Assign Permissions to Roles</h2>
+            </div>
+            <div class="section-content">
+                <p>Assign specific permissions to roles.</p>
+                <a href="{{ url_for('admin.manage_role_permissions') }}" class="btn btn-primary">Assign Permissions</a>
+            </div>
+        </div>
+
+        <!-- User-Role Assignment Section -->
+        <div class="dashboard-section">
+            <div class="section-header">
+                <h2>Assign Roles to Users</h2>
+            </div>
+            <div class="section-content">
+                <p>Assign roles to users for access management.</p>
+                <a href="{{ url_for('admin.manage_user_roles') }}" class="btn btn-primary">Assign Roles</a>
+            </div>
+        </div>
+
+        <!-- Logs Section -->
+        <div class="dashboard-section">
+            <div class="section-header">
+                <h2>View Logs</h2>
+            </div>
+            <div class="section-content">
+                <p>Review system activity logs for monitoring actions performed by users and administrators.</p>
+                <a href="{{ url_for('admin.view_logs') }}" class="btn btn-primary">View Logs</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

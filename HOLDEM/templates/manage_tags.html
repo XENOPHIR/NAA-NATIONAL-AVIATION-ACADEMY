@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+
+{% block title %}Manage Tags{% endblock %}
+
+{% block content %}
+<div class="admin-container">
+    <h1>Manage Tags</h1>
+
+    <form method="POST" class="admin-form">
+        <div class="form-group">
+            <label for="name">Tag Name</label>
+            <input type="text" name="name" id="name" required>
+        </div>
+        <div class="form-group">
+            <label for="description">Description</label>
+            <textarea name="description" id="description"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="is_active">
+                <input type="checkbox" name="is_active" id="is_active" checked>
+                Active
+            </label>
+        </div>
+        <button type="submit" class="btn btn-primary">Add Tag</button>
+    </form>
+
+    <table class="admin-table">
+        <thead>
+            <tr>
+                <th>Tag ID</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for tag in tags %}
+            <tr id="tag-{{ tag.TagID }}">
+                <td>{{ tag.TagID }}</td>
+                <td>{{ tag.Name }}</td>
+                <td>{{ tag.Description }}</td>
+                <td>
+                    {% if tag.IsActive %}
+                    <span class="status-active">Active</span>
+                    {% else %}
+                    <span class="status-inactive">Inactive</span>
+                    {% endif %}
+                </td>
+                <td>
+                    <button class="btn btn-secondary" onclick="showEditForm({{ tag.TagID }})">Edit</button>
+                    <form action="{{ url_for('admin.delete_tag', tag_id=tag.TagID) }}" method="POST" style="display:inline;">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </td>
+            </tr>
+
+            <tr id="edit-form-{{ tag.TagID }}" style="display: none;">
+                <td colspan="5">
+                    <form method="POST" action="{{ url_for('admin.edit_tag', tag_id=tag.TagID) }}">
+                        <div class="form-group-edit">
+                            <label for="edit-name-{{ tag.TagID }}">Tag Name</label>
+                            <input type="text" name="name" id="edit-name-{{ tag.TagID }}" value="{{ tag.Name }}" required>
+                        </div>
+                        <div class="form-group-edit">
+                            <label for="edit-description-{{ tag.TagID }}">Description</label>
+                            <textarea name="description" id="edit-description-{{ tag.TagID }}">{{ tag.Description }}</textarea>
+                        </div>
+                        <div class="form-group-edit">
+                            <label for="edit-is_active-{{ tag.TagID }}">
+                                <input type="checkbox" name="is_active" id="edit-is_active-{{ tag.TagID }}" {% if tag.IsActive %}checked{% endif %}>
+                                <br>
+                                Active
+                            </label>
+                        </div>
+                        <button type="submit" class="btn btn-success">Save Changes</button>
+                        <button type="button" class="btn btn-secondary" onclick="hideEditForm({{ tag.TagID }})">Cancel</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<script>
+    function showEditForm(tagID) {
+        document.getElementById('tag-' + tagID).style.display = 'none';
+        document.getElementById('edit-form-' + tagID).style.display = 'table-row';
+    }
+
+    function hideEditForm(tagID) {
+        document.getElementById('tag-' + tagID).style.display = 'table-row';
+        document.getElementById('edit-form-' + tagID).style.display = 'none';
+    }
+</script>
+{% endblock %}

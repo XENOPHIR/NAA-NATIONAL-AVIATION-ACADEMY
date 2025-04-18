@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="manage-container">
+    <h1>Manage Role Permissions</h1>
+    <form method="POST" class="manage-form dropdown-container">
+        <div>
+            <label for="role_id">Select Role:</label>
+            <select id="role_id" name="role_id" required>
+                {% for role in roles %}
+                <option value="{{ role[0] }}">{{ role[1] }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div>
+            <label for="permission_id">Select Permission:</label>
+            <select id="permission_id" name="permission_id" required>
+                {% for permission in permissions %}
+                <option value="{{ permission[0] }}">{{ permission[1] }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <button type="submit">Assign Permission</button>
+    </form>
+
+    <h2 class="section-title">Role Permissions</h2>
+    <table class="manage-table">
+        <thead>
+            <tr>
+                <th>Role</th>
+                <th>Permission</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for rp in role_permissions %}
+            <tr>
+                <td>{{ rp[1] }}</td>
+                <td>{{ rp[2] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

@@ -1,0 +1,53 @@
+<!-- NAVBAR -->
+<nav>
+
+    <!-- LOGO START -->
+    <div class="logo">
+        <a href="/">
+            <img src="{{ url_for('static', filename='imgs/LOGO.png') }}" alt="HOLDEM" />
+        </a>
+    </div>
+    <!-- LOGO END -->
+
+    <!-- MAIN MENU START -->
+    <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/services">Services</a></li>
+        <li><a href="/products">Products</a></li>
+        <li><a href="/#about">About</a></li>
+        <li><a href="/contact">Contact</a></li>
+    </ul>
+    <!-- MAIN MENU END -->
+
+    <!-- SEARCH BAR START-->
+    <div class="search-bar">
+        <form action="/search" method="GET">
+            <input type="text" name="q" placeholder="Search..." aria-label="Search">
+            <button type="submit">
+                <img src="{{ url_for('static', filename='imgs/search.png') }}" alt="Search" />
+            </button>
+        </form>
+    </div>
+    <!-- SEARCH BAR END -->
+
+    <!-- FAVORITES START -->
+    <ul>
+        <li><a href="/favorites">Favorites</a></li>
+        <li><a href="/cart">Cart</a></li>
+    </ul>
+    <!-- FAVORITES END -->
+
+    <!-- AUTHORIZATION START -->
+    <ul>
+        {% comment %} {% if session.get('user_id') %}
+            <li><span>Welcome, {{ session.get('username', 'User') }}</span></li>
+            <li><a href="/logout">Logout</a></li>
+        {% else %} {% endcomment %}
+            <li><a href="/login">Login</a></li>
+            <li><a href="/register">Register</a></li>
+        {% comment %} {% endif %} {% endcomment %}
+    </ul>
+    <!-- AUTHORIZATION END -->
+
+</nav>
+<!-- NAVBAR END -->

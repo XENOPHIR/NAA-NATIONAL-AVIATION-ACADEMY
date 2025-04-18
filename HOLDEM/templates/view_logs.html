@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}HOLDEM VIEW LOGS{% endblock %}
+
+{% block content %}
+<div class="admin-container">
+    <h1>System Logs</h1>
+
+    {% if logs|length > 0 %}
+    <table class="admin-table">
+        <thead>
+            <tr>
+                <th>Log ID</th>
+                <th>User ID</th>
+                <th>Action</th>
+                <th>Details</th>
+                <th>Created At</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for log in logs %}
+            <tr>
+                <td>{{ log.LogID }}</td>
+                <td>{{ log.UserID if log.UserID else 'System' }}</td>
+                <td>{{ log.Action }}</td>
+                <td>{{ log.Details }}</td>
+                <td>{{ log.CreatedAt }}</td>
+                <td>
+                    {% if log.IsActive %}
+                    <span class="status-active">Active</span>
+                    {% else %}
+                    <span class="status-inactive">Inactive</span>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p class="empty-message">No logs available at the moment.</p>
+    {% endif %}
+</div>
+{% endblock %}

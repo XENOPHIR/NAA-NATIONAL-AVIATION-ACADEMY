@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}Checkout{% endblock %}
+
+{% block content %}
+<div class="checkout-container">
+    <h1>Checkout</h1>
+
+    <!-- Order Summary Section -->
+    <div class="checkout-details">
+        <h3>Order Summary</h3>
+        {% if cart_items %}
+            <ul>
+                {% for item in cart_items %}
+                <li>{{ item[1] }} x {{ item[3] }} - ${{ "%.2f"|format(item[1] * item[5]) }}</li>
+                {% endfor %}
+            </ul>
+            <p><strong>Total: ${{ "%.2f"|format(total_amount) }}</strong></p>
+        {% else %}
+            <p>Your cart is empty.</p>
+        {% endif %}
+    </div>    
+
+    <!-- Payment Method Section -->
+    <div class="checkout-payment">
+        <h3>Select Payment Method</h3>
+        {% if payment_cards %}
+        <form method="POST" action="{{ url_for('checkout') }}">
+            <div class="payment-methods">
+                {% for card in payment_cards %}
+                <label>
+                    <input type="radio" name="payment_card" value="{{ card[0] }}" {% if card[5] %}checked{% endif %}>
+                    {{ card[3] }} - **** {{ card[2][-4:] }} (Expires: {{ card[4] }})
+                </label>
+                {% endfor %}
+            </div>
+            <button type="submit" class="btn btn-primary">Place Order</button>
+        </form>
+        {% else %}
+        <p>No payment methods available. Please add a payment card.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

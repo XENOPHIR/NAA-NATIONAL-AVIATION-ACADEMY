@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}Favorites{% endblock %}
+
+{% block content %}
+<div class="favorites-container">
+    <h1>Your Favorites</h1>
+    <br>
+    {% if products|length > 0 %}
+        <div class="favorites-list">
+            {% for product in products %}
+            <div class="favorite-item">
+                <div class="favorite-image">
+                    <img src="{{ url_for('static', filename=product.ImagePath) }}" alt="{{ product.Name }}">
+                </div>
+                <div class="favorite-info">
+                    <h2>{{ product.Name }}</h2>
+                    <p>${{ "%.2f"|format(product.BasePrice) }}</p>
+                    <button class="btn btn-pr-secondary"><a href="{{ url_for('product_details', product_id=product.ProductID) }}">View Details</a></button>
+                </div>
+                <div class="favorite-remove">
+                    <form action="{{ url_for('remove_favorite', product_id=product.ProductID) }}" method="POST">
+                        <button type="submit" class="btn btn-danger">Remove</button>
+                    </form>                    
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>You have no favorites yet.</p>
+    {% endif %}
+</div>
+{% endblock %}

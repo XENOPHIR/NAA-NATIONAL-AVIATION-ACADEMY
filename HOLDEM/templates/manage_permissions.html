@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="manage-container">
+    <h1>Manage Permissions</h1>
+    <form method="POST" class="manage-form">
+        <div>
+            <label for="permission_name">Permission Name:</label>
+            <input type="text" id="permission_name" name="permission_name" required>
+        </div>
+        <div>
+            <label for="description">Description:</label>
+            <textarea id="description" name="description"></textarea>
+        </div>
+        <div>
+            <label for="is_active">Active:</label>
+            <input type="checkbox" id="is_active" name="is_active" checked>
+        </div>
+        <button type="submit">Add Permission</button>
+    </form>
+
+    <h2 class="section-title">Existing Permissions</h2>
+    <table class="manage-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for permission in permissions %}
+            <tr>
+                <td>{{ permission[0] }}</td>
+                <td>{{ permission[1] }}</td>
+                <td>{{ permission[2] }}</td>
+                <td>{{ 'Active' if permission[3] else 'Inactive' }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

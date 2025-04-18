@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}{{ product.Name }} - Details{% endblock %}
+
+{% block content %}
+<div class="pd-container">
+    <div class="pd-left">
+        <div class="pd-image">
+            <img src="{{ url_for('static', filename=product.ImagePath) }}" alt="{{ product.Name }}">
+        </div>
+        <div class="pd-info">
+            <h1 class="pd-title">{{ product.Name }}</h1>
+            <p class="pd-price">${{ "%.2f"|format(product.BasePrice) if product.BasePrice else "0.00" }}</p>
+            <p class="pd-description">{{ product.Description if product.Description else "No description available." }}</p>
+            <ul class="pd-details-list">
+                <li><strong>Category:</strong> {{ product.CategoryName if product.CategoryName else "N/A" }}</li>
+                <li><strong>Brand:</strong> {{ product.BrandName if product.BrandName else "N/A" }}</li>
+                <li><strong>Tags:</strong> {{ product.Tags if product.Tags else "No tags available." }}</li>
+                <li><strong>Stock Available:</strong> {{ product.Stock if product.Stock is not none else "0" }}</li>
+                <li><strong>Reserved:</strong> {{ product.Reserved if product.Reserved is not none else "0" }}</li>
+            </ul>    
+            <div class="pd-buttons">
+                <button class="btn btn-pr">Add to Cart</button>
+                <button class="btn btn-pr-secondary">Add to Favorites</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="pd-right">
+        <h2 class="pd-reviews-title">Reviews</h2>
+
+        {# Проверяем, есть ли отзывы #}
+        {% if reviews|length > 0 %}
+        <div class="pd-reviews-list">
+            {% for review in reviews %}
+            <div class="pd-review-card">
+                <h3 class="pd-review-user">{{ review.Username }}</h3>
+                <p class="pd-review-rating">Rating: {{ review.Rating }}/5</p>
+                <p class="pd-review-comment">{{ review.Comment }}</p>
+                <p class="pd-review-date">Reviewed on {{ review.CreatedAt.strftime('%Y-%m-%d') }}</p>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p class="pd-no-reviews">No reviews yet for this product.</p>
+        {% endif %}
+
+        <p class="pd-login-reminder">You must <a href="#">log in</a> to leave a review.</p>
+    </div>
+</div>
+{% endblock %}

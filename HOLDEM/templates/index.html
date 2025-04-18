@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<!-- Main Banner -->
+<div class="main-banner" style="background-image: url({{ url_for('static', filename='imgs/main-banner.png') }})">
+    <div class="overlay"></div> 
+    <h1>Where Deals Are Always in Your Hands.</h1>
+    <p>Your ultimate shopping experience begins here.</p>
+    
+    <div class="button-container">
+        <a href="#services" class="btn">Learn More</a>
+        <a href="#contact" class="btn-secondary">Contact Us</a>
+    </div>
+</div>
+
+<!-- Main Inner -->
+<div class="main-inner"> 
+
+    <!-- About Section -->
+    <div class="about" id="about">
+        <h2>About HOLDEM</h2>
+        <div class="about-content">
+            <p>At Holdem, we take pride in blending the thrill with a seamless shopping experience, offering solutions that are both exciting and unmatched.</p>
+            <div class="about-icon">
+                <img src="{{ url_for('static', filename='imgs/about-icon1.png') }}" alt="Innovation Icon">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const aboutLink = document.querySelector('a[href="/#about"]');
+            
+            aboutLink.addEventListener('click', function (event) {
+                if (window.location.pathname === '/') {
+                    event.preventDefault();
+                    const aboutSection = document.querySelector('#about');
+                    aboutSection.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+    
+
+    <!-- Services Section -->
+    <div class="services">
+        <h2>Why HOLDEM?</h2>
+        <div class="service-box-container">
+            <div class="service-box">
+                <div class="service-icon">
+                    <img src="{{ url_for('static', filename='imgs/icon1.png') }}" alt="Quality Icon">
+                </div>
+                <h3>Premium Quality</h3>
+                <p>Our services redefine industry standards with exceptional quality.</p>
+            </div>
+            <div class="service-box">
+                <div class="service-icon">
+                    <img src="{{ url_for('static', filename='imgs/icon2.png') }}" alt="Solutions Icon">
+                </div>
+                <h3>Personalized Solutions</h3>
+                <p>Tailored strategies to meet your specific needs.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Testimonials Section -->
+    <div class="testimonials">
+        <h2>Clients</h2>
+        <div class="testimonial-carousel">
+            <div class="testimonial-card active">
+                <img src="{{ url_for('static', filename='imgs/profile1.jpeg') }}" alt="John Doe" class="profile-pic">
+                <p>"HOLDEM helped our business reach new heights with their innovative solutions."</p>
+                <h4>John Doe, CEO</h4>
+            </div>
+            
+            <div class="testimonial-card">
+                <img src="{{ url_for('static', filename='imgs/profile2.jpg') }}" alt="Jane Smith" class="profile-pic">
+                <p>"Their team is extremely professional and dedicated to our success."</p>
+                <h4>Jane Smith, Marketing Director</h4>
+            </div>
+            
+            <div class="testimonial-card">
+                <img src="{{ url_for('static', filename='imgs/profile3.jpeg') }}" alt="Michael Johnson" class="profile-pic">
+                <p>"HOLDEM's approach is unique and results-driven!"</p>
+                <h4>Michael Johnson, Founder</h4>
+            </div>
+        </div>
+        
+        <div class="client-stats">
+            <div class="stat">
+                <span class="stat-value">100<span class="stat-value rotate">+</span></span>
+                <span class="stat-label">Clients</span>
+            </div>
+            <div class="stat">
+                <span class="stat-value">250<span class="stat-value rotate">+</span></span>
+                <span class="stat-label">Testimonials</span>
+            </div>
+            <div class="stat">
+                <span class="stat-value">10<span class="stat-value rotate">+</span></span>
+                <span class="stat-label">Years in Business</span>
+            </div>
+            <div class="stat">
+                <span class="stat-value">5</span>
+                <span class="stat-label">Awards</span>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
