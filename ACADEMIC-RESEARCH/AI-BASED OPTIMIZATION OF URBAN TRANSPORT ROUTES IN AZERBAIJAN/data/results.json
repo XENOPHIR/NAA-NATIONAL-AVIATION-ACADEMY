@@ -1,0 +1,27 @@
+{
+  "Dijkstra": {
+    "distance_km": 16.3,
+    "congestion": 75,
+    "travel_time_min": 28
+  },
+  "A*": {
+    "distance_km": 16.1,
+    "congestion": 70,
+    "travel_time_min": 26
+  },
+  "Genetic": {
+    "distance_km": 16.0,
+    "congestion": 60,
+    "travel_time_min": 22
+  },
+  "Reinforcement Learning": {
+    "distance_km": 15.5,
+    "congestion": 50,
+    "travel_time_min": 18
+  },
+  "Hybrid": {
+    "distance_km": 15.2,
+    "congestion": 47,
+    "travel_time_min": 16
+  }  
+}

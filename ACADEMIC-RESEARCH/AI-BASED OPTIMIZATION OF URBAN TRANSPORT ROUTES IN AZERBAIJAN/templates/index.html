@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Urban Route Optimizer</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="page-wrapper">
+        <header class="header">
+            <h1>AI-Based Optimization of Urban Transport Routes</h1>
+        </header>
+    
+        <div class="main-layout">
+            <div class="left-column">
+                <p>Select start and end points by clicking on the map.</p>
+                <div id="map"></div>
+    
+                <div class="controls">
+                    <select id="algorithmSelect">
+                        <option value="Dijkstra">Dijkstra</option>
+                        <option value="A*">A*</option>
+                        <option value="Genetic">Genetic</option>
+                        <option value="Reinforcement Learning">Reinforcement Learning</option>
+                    </select>
+                    <button id="calculateBtn" disabled>Calculate</button>
+                    <button id="compareAllBtn">Compare All</button>
+                    <button id="hybridBtn">Hybrid Scenario</button>
+                </div>
+            </div>
+    
+            <div class="right-column">
+                <div id="loading" class="loader"></div>
+                <div id="results">
+                    <div id="placeholder" class="result-box">No result yet. Select points and click a button.</div>
+                </div>
+    
+                <div class="chart-section">
+                    <canvas id="chart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="{{ url_for('static', filename='main.js') }}"></script>
+</body>    
+</html>
+ 
